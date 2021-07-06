@@ -110,6 +110,40 @@ public class MySingleLinkedList<T> {
 		return removeAfter(prev);
 
 	}
+	
+	public T remove(T item) {
+		//³»°¡Â«
+//		Node<T> p = head;
+//		Node<T> p2 = head;
+//		int index = 0;
+//		while (p != null) {
+//			if(p.data == item) {
+//				for(int i = 0; i < index-1; i++ ) {
+//					p2 = p2.next;
+//				}
+//				p2.next = p.next.next;
+//				size--;
+//				return p2.data;
+//			}
+//			p = p.next;
+//			index++;
+//		}
+//		return null;
+		
+		//Á¤´ä
+		Node<T> p = head, q = null;
+		while(p != null && !p.data.equals(item)) {
+			q = p;
+			p = p.next;
+		}
+		if(p == null) 
+			return null;
+					
+		if(q == null)
+			return removeFirst();
+		
+		return removeAfter(q);
+	}
 
 	public Node<T> getNode(int index) {
 		if (index < 0 || index >= size) {
@@ -158,6 +192,7 @@ public class MySingleLinkedList<T> {
 
 	public static void main(String[] args) {
 		MySingleLinkedList<String> list = new MySingleLinkedList<>();
+		MySingleLinkedList<String> list2 = new MySingleLinkedList<>();
 
 		list.add(0, "Saturday");
 		list.add(1, "Friday");
@@ -167,5 +202,18 @@ public class MySingleLinkedList<T> {
 		String str = list.get(2); // str = "Tuesday";
 		list.remove(2); // M, S, F
 		int pos = list.indexOf("Friday"); // pos = 2
+		
+		list2.addFirst("Monday");
+		list2.addFirst("Sunday");
+		list2.add(2, "Saturday");
+		list2.add(2, "Friday");
+		for(int i = 0; i< list2.size;i++) {
+			System.out.println(list2.getNode(i).data);
+		}
+		list2.remove("Friday");
+		int index = list2.indexOf("Saturday");
+		System.out.println(index);
+		
+		
 	}
 }
